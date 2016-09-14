@@ -2,12 +2,7 @@ var request = require("request");
 var apiRoot = "https://api.github.com";
 
 module.exports = function getRepoContributors(owner, repo, api_token, cb) {
-
-
-  console.log("getting repo contributors");
-
-  result = [];
-  request.get({
+var options = {
     url: apiRoot + '/repos/' + owner + "/" + repo + '/contributors',
     auth: {
       user: 'sarahveness',
@@ -17,15 +12,6 @@ module.exports = function getRepoContributors(owner, repo, api_token, cb) {
       'User-Agent': 'Lighthouse'
     },
     json: true
-  }, function (err, incomingMessage, contributors) {
-      console.log("got repo contributors");
-      debugger;
-      if (err) {
-        console.log("Error geting cons: " +err);
-        return;
-      }
-
-      cb(err, contributors);
-
-    });
+  };
+  request.get(options, cb);
 }
